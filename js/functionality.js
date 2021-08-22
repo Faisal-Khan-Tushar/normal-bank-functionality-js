@@ -12,8 +12,29 @@ function updateBalance(fieldId, amount) {
   const newTotal = previousTotal + amount;
   totalTag.innerText = newTotal;
 }
+//updating the bank balance
+function updateBankBalance(amount, isAdd) {
+  const totalTag = document.getElementById('balance-total');
+  const totalTagText = totalTag.innerText;
+  const previousBankBalance = parseFloat(totalTagText);
+  let newBankBalance;
+  if (isAdd) {
+    newBankBalance = previousBankBalance + amount;
+  }
+  else {
+    newBankBalance = previousBankBalance - amount;
+  }
+  totalTag.innerText = newBankBalance;
+}
 
 document.getElementById('deposit-button').addEventListener('click', function () {
   const amount = gettingInputValue('deposit-input');
   updateBalance('deposit-total', amount);
+  updateBankBalance(amount, true);
+})
+//handling the withdraw button
+document.getElementById('withdraw-button').addEventListener('click', function () {
+  const amount = gettingInputValue('withdraw-input');
+  updateBalance('withdraw-total', amount);
+  updateBankBalance(amount, false);
 })
